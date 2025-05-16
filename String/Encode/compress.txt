@@ -1,6 +1,6 @@
 #ifdef DEBUG
   #include "c:/Users/user/Documents/Programming/Utility/String/Encode/a_Body.hpp"
 #else
-TE <TY INT> IN char IntToChar(CO INT& i,CO char& c = 'a'){RE c + i;}TE <TY INT = int> IN INT CharToInt(CO char& i){RE i -(i < 'a'?'A':'a');}TE <TY INT>string ArrayToString(CO VE<INT>& A,CO char& c = 'a'){CO int N = A.SZ();string S(N,c);for(int i = 0;i < N;i++){S[i]= IntToChar<INT>(A[i],c);}RE S;}TE <TY INT = int>VE<INT> StringToArray(CO string& S){CO int N = S.SZ();VE<int> A(N);for(int i = 0;i < N;i++){A[i]= CharToInt<INT>(S[i]);}RE A;}
+TE <TY INT> IN char IntToChar(CO INT& i,CO char& c = 'a'){RE c + i;}TE <TY INT = int> IN INT CharToInt(CO char& i){RE i -(i < 'a'?'A':'a');}TE <TY INT>string ArrayToString(CO VE<INT>& A,CO char& c = 'a'){CO int N = A.SZ();string S(N,c);for(int i = 0;i < N;i++){S[i]= IntToChar<INT>(A[i],c);}RE S;}TE <TY INT = int>VE<INT> StringToArray(CO string& S){CO int N = S.SZ();VE<int> A(N);for(int i = 0;i < N;i++){A[i]= CharToInt<INT>(S[i]);}RE A;}TE <TY INT>string ArrayToParenthesisString(CO VE<INT>& A){CO int N = A.SZ();string S(N,'(');for(int i = 0;i < N;i++){AS(0 <= A[i]&& A[i]<= 1);S[i]= "()"[A[i]];}RE S;}TE <TY INT = int>VE<INT> ParenthesisStringToArray(CO string& S){CO int N = S.SZ();VE<int> A(N);for(int i = 0;i < N;i++){A[i]= S[i]- '(';}RE A;}
 #endif
 

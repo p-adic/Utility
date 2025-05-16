@@ -40,5 +40,39 @@ vector<INT> StringToArray( const string& S )
 
 }
 
-
 inline char Chapitalise( const char& c ) { return c < 'a' ? c + ( 'a' - 'A' ) :  c - ( 'a' - 'A' ); }
+
+template <typename INT>
+string ArrayToParenthesisString( const vector<INT>& A )
+{
+
+  const int N = A.size();
+  string S( N , '(' );
+
+  for( int i = 0 ; i < N ; i++ ){
+
+    assert( 0 <= A[i] && A[i] <= 1 );
+    S[i] = "()"[A[i]];
+
+  }
+
+  return S;
+
+}
+
+template <typename INT>
+vector<INT> ParenthesisStringToArray( const string& S )
+{
+
+  const int N = S.size();
+  vector<int> A( N );
+
+  for( int i = 0 ; i < N ; i++ ){
+
+    A[i] = S[i] - '(';
+
+  }
+
+  return A;
+
+}
