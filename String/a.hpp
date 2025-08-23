@@ -13,12 +13,12 @@ inline string to_string( const string& s ) noexcept;
 inline string to_string( const char* const & s ) noexcept;
 inline string to_string( char* const & s ) noexcept;
 inline string to_string( const bool& ) noexcept;
-// 以下はEntryOfVLArray<T>なども拾ってしまうので削除。
-// template <template <typename...> typename V , typename T> inline string to_string( const V<T>& a );
-template <typename T> inline string to_string( const vector<T>& a );
-template <typename T> inline string to_string( const list<T>& a );
-template <typename T> inline string to_string( const set<T>& a );
-template <typename ARG1 , typename ARG2 , typename... ARGS> inline string to_string( const ARG1& arg1 , const ARG2& arg2 , const ARGS&... args );
+// 以下はEntryOfVLArray<T>なども拾ってしまうので削除。代わりに明示的な特殊化のみ実装。
+// template <template <typename...> typename V , typename T> inline string to_string( const V<T>& a ) noexcept;
+template <typename T> inline string to_string( const vector<T>& a ) noexcept;
+template <typename T> inline string to_string( const list<T>& a ) noexcept;
+template <typename T> inline string to_string( const set<T>& a ) noexcept;
+template <typename ARG1 , typename ARG2 , typename... ARGS> inline string to_string( const ARG1& arg1 , const ARG2& arg2 , const ARGS&... args ) noexcept;
 
 // to_string( typeid( T ) )で"T"を出力
 string to_string( const type_info& ) noexcept;
@@ -37,7 +37,7 @@ template <typename... T0> auto to_string() noexcept -> typename enable_if< equal
 template <typename... T0> auto to_string() noexcept -> typename enable_if< equal_to<uint>()( sizeof...( T0 ) , 1 ) , string >::type;
 template <typename... T0> auto to_string() noexcept -> typename enable_if< less_equal<uint>()( 2 , sizeof...( T0 ) ) , string >::type;
 
-int to_int( const string& s );
+inline int to_int( const string& s );
 
 bool CheckEmpty( const string& s ) noexcept;
 // 全角に対応（恐らくstring::npos != s0.find( s1 )でも問題ないが念のため）

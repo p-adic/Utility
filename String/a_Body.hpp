@@ -11,32 +11,68 @@ inline string to_string( const string& s ) noexcept { return s; }
 inline string to_string( const char* const & s ) noexcept { return s; }
 inline string to_string( char* const & s ) noexcept { return s; }
 inline string to_string( const bool& b ) noexcept { return b ? "true" : "false"; }
-// template <template <typename...> typename V , typename T> inline string to_string( const V<T>& a ) { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
-template <typename T> inline string to_string( const vector<T>& a ) { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
-template <typename T> inline string to_string( const list<T>& a ) { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
-template <typename T> inline string to_string( const set<T>& a ) { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
+// template <template <typename...> typename V , typename T> inline string to_string( const V<T>& a ) noexcept { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
+template <typename T> inline string to_string( const vector<T>& a ) noexcept { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
+template <typename T> inline string to_string( const list<T>& a ) noexcept { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
+template <typename T> inline string to_string( const set<T>& a ) noexcept { string answer = "("; auto itr = a.begin() , end = a.end(); while( itr != end ){ answer += to_string( *itr ); answer += ",)"[++itr == end]; } return answer; }
 
-template <typename ARG1 , typename ARG2 , typename... ARGS> inline string to_string( const ARG1& arg1 , const ARG2& arg2 , const ARGS&... args ) { return to_string( arg1 ) + "," + to_string( arg2 , args... ); }
+template <typename ARG1 , typename ARG2 , typename... ARGS> inline string to_string( const ARG1& arg1 , const ARG2& arg2 , const ARGS&... args ) noexcept { return to_string( arg1 ) + "," + to_string( arg2 , args... ); }
 
 // 例外を送出するようなメンバ関数Displayを実装してはならない。
 DECLARATION_OF_MEMBER_CONST_TRUE( to_string ) noexcept
 {
 
-  return ( t. Display )( args... );
+  string s;
+
+  try{
+    
+   s = ( t. Display )( args... );
+
+  } catch( ... ){
+
+    s = "unintended error in to_string for a class with Display() const";
+
+  }
+
+  return s;
 
 }
 
 DECLARATION_OF_MEMBER_NON_CONST_TRUE_LVALUE( to_string ) noexcept
 {
 
-  return ( t. Display )( args... );
+  string s;
+
+  try{
+    
+   s = ( t. Display )( args... );
+
+  } catch( ... ){
+
+    s = "unintended error in to_string for a class with const string& Display()";
+
+  }
+
+  return s;
 
 }
 
 DECLARATION_OF_MEMBER_NON_CONST_TRUE_RVALUE( to_string ) noexcept
 {
 
-  return ( t. Display )( args... );
+  string s;
+
+  try{
+    
+   s = ( t. Display )( args... );
+
+  } catch( ... ){
+
+    s = "unintended error in to_string for a class with string Display()";
+
+  }
+
+  return s;
 
 }
 
@@ -107,6 +143,8 @@ auto to_string() noexcept -> typename enable_if< less_equal<uint>()( 2 , sizeof.
   return "(" + to_string_Body<T0...>() + ")";
 
 }
+
+inline to_int( const string& s ) { return stoi( s ); }
 
 inline bool CheckEmpty( const string& s ) noexcept { return s == ""; }
 
