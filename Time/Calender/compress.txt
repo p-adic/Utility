@@ -1,0 +1,6 @@
+#ifdef DEBUG
+  #include "c:/Users/user/Documents/Programming/Utility/Time/Calender/a_Body.hpp"
+#else
+TE <TY INT> IN bool IsLeap(CO INT& y){RE y % 4 == 0 &&(y % 100 != 0 || y % 400 == 0);}TE <TY INT> IN bool IsValidDate(CO INT& y,CRI m,CRI d){ST CE CO int days[]={0,31,28,31,30,31,30,31,31,30,31,30,31};RE 1 <= y && 1 <= m && m <= 12 && 1 <= d && d <= days[m]+(m == 2 && IsLeap(y)?1:0);}TE <TY TUPLE> IN bool IsValidDate(CO TUPLE& ymd){auto&[y,m,d]= ymd;RE IsValidDate(y,m,d);}TE <TY INT> IN INT CountDay(CO INT& y,CRI m,CRI d){AS(IsValidDate(y,m,d));ST CE CO int cdays ={0,31,59,90,120,151,181,212,243,273,304,334};RE(y - 1)* 365 +(y - 1)/ 4 -(y - 1)/ 100 +(y - 1)/ 400 + cdays[m-1]+(m > 2 && y % 4 == 0 &&(y % 100 != 0 || y % 400 == 0)?1:0)+ d;}TE <TY TUPLE> IN auto CountDay(CO TUPLE& ymd)-> decltype(get<0>(ymd)){auto&[y,m,d]= ymd;RE CountDay(y,m,d);}
+#endif
+
