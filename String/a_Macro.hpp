@@ -6,6 +6,9 @@
 #define CONNECT( S1 , S2 ) SUBSTITUTE_CONNECT( S1 , S2 ) 
 #define SUBSTITUTE_CONNECT( S1 , S2 ) S1 ## S2 
 
+#define TO_CHAR( ... ) SUBSTITUTE_TO_CHAR( __VA_ARGS__ ) 
+#define SUBSTITUTE_TO_CHAR( ... ) #__VA_ARGS__ 
+
 #define TO_STRING( ... ) SUBSTITUTE_TO_STRING( __VA_ARGS__ ) 
 #define SUBSTITUTE_TO_STRING( ... ) to_string( #__VA_ARGS__ ) 
 

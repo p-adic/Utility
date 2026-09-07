@@ -19,7 +19,7 @@ private:
   static auto Check() -> typename enable_if< ! ( is_same< typename CONNECT( imply_TypeOf_member_ , Display )<U,A...> ::type , string >::value || is_ReferenceOf< typename CONNECT( imply_TypeOf_member_ , Display )<U,A...> ::type , string >::value ) , false_type >::type;
 
 public:
-  static const bool value = decltype( Check<T,Args...>() )::value;
+  static constexpr const bool value = decltype( Check<T,Args...>() )::value;
 
 };
 
@@ -36,7 +36,7 @@ private:
   static auto Check() -> typename enable_if< ! ( is_same< typename CONNECT( imply_TypeOf_member_const_ , Display )<U,A...> ::type , string >::value || is_ReferenceOf< typename CONNECT( imply_TypeOf_member_const_ , Display )<U,A...> ::type , string >::value ) , false_type >::type;
 
 public:
-  static const bool value = decltype( Check<T,Args...>() )::value;
+  static constexpr const bool value = decltype( Check<T,Args...>() )::value;
 
 };
 
