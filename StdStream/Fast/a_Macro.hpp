@@ -16,4 +16,3 @@
 
 #define DEFINITION_OF_SCAN_FOR_STRING_TYPE( TYPE ) \
   template <SFINAE_FOR_STD_STREAM( TYPE , )> inline void StdStream::Scan( T& t ) { t = ""; if( g_head == g_length ){ Load(); } while( g_c == g_space || g_c == g_new_line ){ ShiftHead(); } while( !( g_c == g_space || g_c == g_new_line ) ){ t += g_c; ShiftHead(); } } \
-

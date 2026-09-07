@@ -1,0 +1,14 @@
+#ifdef DEBUG
+  #include "c:/Users/user/Documents/Programming/Utility/StdStream/Fast/a_Body.hpp"
+#else
+#define SFINAE_FOR_STD_STREAM(TYPE,DEFAULT)TY T,enable_if_t<is_same<T,TYPE>::value>* DEFAULT
+#define DC_OF_SCAN(TYPE)TE <SFINAE_FOR_STD_STREAM(TYPE,= nullptr)> ST IN VO Scan(T& t)
+#define DF_OF_SCAN_FOR_SIGNED_INT_TYPE(TYPE)TE <SFINAE_FOR_STD_STREAM(TYPE,)> IN VO StdStream::Scan(T& t){t = 0;if(g_head == g_le){Load();}WH(g_c == g_space || g_c == g_new_line){ShiftHead();}bool negative = false;if(g_c == g_minus){negative = true;ShiftHead();}WH(!(g_c == g_space || g_c == g_new_line)){(t *= 10)+=(g_c - g_zero);ShiftHead();}if(negative){t *= -1;}}
+#define DF_OF_SCAN_FOR_UNSIGNED_INT_TYPE(TYPE)TE <SFINAE_FOR_STD_STREAM(TYPE,)> IN VO StdStream::Scan(T& t){t = 0;if(g_head == g_le){Load();}WH(g_c == g_space || g_c == g_new_line){ShiftHead();}WH(!(g_c == g_space || g_c == g_new_line)){(t *= 10)+=(g_c - g_zero);ShiftHead();}}
+#define DF_OF_SCAN_FOR_STRING_TYPE(TYPE)TE <SFINAE_FOR_STD_STREAM(TYPE,)> IN VO StdStream::Scan(T& t){t = "";if(g_head == g_le){Load();}WH(g_c == g_space || g_c == g_new_line){ShiftHead();}WH(!(g_c == g_space || g_c == g_new_line)){t += g_c;ShiftHead();}}
+#include <unistd.h>
+CL StdStream{PU:US CharT = char;US Traits = char_traits<CharT>;#ifdef DEBUGST CE int g_le_lim = 100000;#elseST CE int g_le_lim = 200000;#endifST CE int g_le_max = g_le_lim - 1;ST CE CharT g_space = ' ';ST CE CharT g_new_line = '\n';ST CE CharT g_minus = '-';ST CE CharT g_zero = '0';ST int g_le;ST int g_head;ST basic_streambuf<CharT>::int_type g_code;ST CharT g_c;ST CharT g_buffer[g_le_lim];StdStream()= delete;DC_OF_SCAN(int);DC_OF_SCAN(uint);DC_OF_SCAN(ll);DC_OF_SCAN(ull);DC_OF_SCAN(string);ST IN VO Load();ST IN VO ShiftHead();ST IN VO ReadHead();};
+int StdStream::g_le = 0;int StdStream::g_head = 0;basic_streambuf<StdStream::CharT>::int_type StdStream::g_code = 0;StdStream::CharT StdStream::g_c = StdStream::g_space;StdStream::CharT StdStream::g_buffer[StdStream::g_le_lim]={};
+IN VO StdStream::Load(){g_le = read(0,g_buffer,g_le_max);g_head = -1;g_c = g_space;}IN VO StdStream::ShiftHead(){if(++g_head == g_le){Load();++g_head;}ReadHead();}IN VO StdStream::ReadHead(){g_c =(g_head == g_le)?g_new_line:g_buffer[g_head];}DF_OF_SCAN_FOR_SIGNED_INT_TYPE(int);DF_OF_SCAN_FOR_SIGNED_INT_TYPE(ll);DF_OF_SCAN_FOR_UNSIGNED_INT_TYPE(uint);DF_OF_SCAN_FOR_UNSIGNED_INT_TYPE(ull);DF_OF_SCAN_FOR_STRING_TYPE(string);TE <TY Arg,TY... ARGS> IN istream& VariadicCin(istream& is,Arg& arg,ARGS&... args){StdStream::Scan(arg);RE VariadicCin(is,args...);}
+#endif
+

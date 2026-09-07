@@ -1,6 +1,8 @@
 // c:/Users/user/Documents/Programming/Utility/StdStream/a.hpp
 
 #pragma once
+// verify: https://yukicoder.me/submissions/1184746
+
 #include "a_Macro.hpp"
 
 #include <unistd.h>

@@ -18,3 +18,5 @@ DEFINITION_OF_SCAN_FOR_SIGNED_INT_TYPE( ll );
 DEFINITION_OF_SCAN_FOR_UNSIGNED_INT_TYPE( uint );
 DEFINITION_OF_SCAN_FOR_UNSIGNED_INT_TYPE( ull );
 DEFINITION_OF_SCAN_FOR_STRING_TYPE( string );
+
+template <typename Arg , typename... ARGS> inline istream& VariadicCin( istream& is , Arg& arg , ARGS&... args ) { StdStream::Scan( arg ); return VariadicCin( is , args... ); }
